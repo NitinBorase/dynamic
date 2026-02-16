@@ -35,6 +35,15 @@ body {
 	letter-spacing: 0.02em;
 }
 
+/*To avoid unclicakble problem*/
+.parallax-layer,
+.grid-overlay,
+.stars,
+.mouse-follower {
+    pointer-events: none;
+}
+
+
 /* Smooth Scrolling */
 html {
 	scroll-behavior: smooth;
@@ -495,6 +504,51 @@ html {
 	height: 100vh;
 	overflow: hidden;
 	background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0f 100%);
+}
+
+
+.admin-login{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	justify-content: end;
+	margin: 50px 20px 0 0;
+}
+
+.admin-btn{
+	padding: 10px 20px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	hover:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		background: rgba(255, 255, 255, 0.3);
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		transition: width 0.6s ease, height 0.6s ease;
+	}
+	:hover:before {
+		width: 300px;
+		height: 300px;
+	}
+	:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
+	}
+	cursor: pointer;
 }
 
 /* Large Diagonal Grid Overlay */
@@ -2416,3 +2470,155 @@ html {
 	}
 }
 
+.admin-login{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	justify-content: end;
+	margin: 50px 20px 0 0;
+}
+
+.admin-btn{
+	padding: 10px 20px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	hover:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 0;
+		height: 0;
+		background: rgba(255, 255, 255, 0.3);
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		transition: width 0.6s ease, height 0.6s ease;
+	}
+	:hover:before {
+		width: 300px;
+		height: 300px;
+	}
+	:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 10px 30px rgba(0, 217, 255, 0.5);
+	}
+	cursor: pointer;
+}
+
+.login-content{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+	padding: 40px;
+	backdrop-filter: blur(10px);
+}
+
+.login-title{
+	font-family: var(--font-heading);
+	color: var(--primary);
+	margin-bottom: 30px;
+	font-size: 1.6rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	text-align: center;
+}
+
+#login-form{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.login-input{
+	width: 100%;
+	padding: 15px 20px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	color: var(--light);
+	font-size: 1rem;
+	transition: all 0.3s ease;
+}
+
+.login-button{
+	padding: 15px 40px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 1.1rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+.editable-content {
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 2px solid rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+	color: var(--light);
+	font-family: var(--font-heading);
+	font-size: 1rem;
+	line-height: 1.6;
+	transition: all 0.3s ease;
+	margin-top: 125px;
+}
+
+.editable-content:hover {
+	background: rgba(255, 255, 255, 0.08);
+	box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+.edit-btn{
+	padding: 10px 20px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	top: 20px;
+	right: 20px;
+	transition: all 0.3s ease;
+}
+
+.update-btn{
+	padding: 10px 20px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	top: 20px;
+	right: 20px;
+	transition: all 0.3s ease;
+}
+
+.hero-container-panel{
+	position: relative;
+	height: auto;
+	overflow: hidden;
+	background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0f 100%);
+}

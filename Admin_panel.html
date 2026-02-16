@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Depth Experience from Tooplate website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="tooplate-parallax-depth.css" rel="stylesheet">
+<!--
+
+Tooplate 2144 Parallax Depth
+
+https://www.tooplate.com/view/2144-parallax-depth
+
+Free HTML CSS Template
+
+-->
+</head>
+<body>
+    <!-- Mouse Follower -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Hero Section with Parallax Layers -->
+    <div class="hero-container-panel" id="hero">
+        <!-- Grid Overlay -->
+        <div class="grid-overlay">
+            <div class="grid-diagonal-1"></div>
+            <div class="grid-diagonal-2"></div>
+        </div>
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <a href="#hero" class="logo">
+                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer hexagon -->
+                    <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" 
+                             fill="none" 
+                             stroke="url(#logo-gradient)" 
+                             stroke-width="2"/>
+                    <!-- Inner triangles creating depth -->
+                    <polygon points="50,20 70,35 50,50" 
+                             fill="url(#logo-gradient)" 
+                             opacity="0.8"/>
+                    <polygon points="50,50 70,35 70,65" 
+                             fill="url(#logo-gradient2)" 
+                             opacity="0.6"/>
+                    <polygon points="50,50 70,65 50,80" 
+                             fill="url(#logo-gradient)" 
+                             opacity="0.7"/>
+                    <polygon points="50,20 30,35 50,50" 
+                             fill="url(#logo-gradient2)" 
+                             opacity="0.7"/>
+                    <polygon points="50,50 30,35 30,65" 
+                             fill="url(#logo-gradient)" 
+                             opacity="0.5"/>
+                    <polygon points="50,50 30,65 50,80" 
+                             fill="url(#logo-gradient2)" 
+                             opacity="0.8"/>
+                    <!-- Center gem -->
+                    <polygon points="50,40 60,50 50,60 40,50" 
+                             fill="url(#logo-gradient3)" 
+                             stroke="#00ffcc" 
+                             stroke-width="1"/>
+                    <!-- Gradient definitions -->
+                    <defs>
+                        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d9ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff00ea;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="logo-gradient2" x1="100%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff00ea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00ffcc;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="logo-gradient3" x1="50%" y1="0%" x2="50%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ffcc;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00d9ff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Parallax Admin Panel</span>
+            </a>
+        </div>
+    
+        <!-- Background Layer -->
+        <div class="parallax-layer layer-bg"></div>
+        
+        <!-- Floating Elements Layer -->
+        <div class="parallax-layer layer-float">
+            <!-- Bottom Left Rectangle Group -->
+            <div class="rectangles-bottom-left">
+                <div class="rect rect-bl-1"></div>
+                <div class="rect rect-bl-2"></div>
+                <div class="rect rect-bl-3"></div>
+                <div class="rect rect-bl-4"></div>
+                <div class="rect rect-bl-5"></div>
+                <div class="rect rect-bl-6"></div>
+            </div>
+            
+            <!-- Top Right Rectangle Group -->
+            <div class="rectangles-top-right">
+                <div class="rect rect-tr-1"></div>
+                <div class="rect rect-tr-2"></div>
+                <div class="rect rect-tr-3"></div>
+                <div class="rect rect-tr-4"></div>
+            </div>
+        </div>
+        
+        <!-- Foreground Layer -->
+        <div class="parallax-layer layer-fg">
+            <div class="glowing-orb orb-1"></div>
+            <div class="glowing-orb orb-2"></div>
+        </div>
+        
+        <!-- Editing Content for about section and for contact section-->
+        <div class="editable-content" id="about-container">
+            <div class="controls">
+                <button class="edit-btn" onclick="toggleEdit(this, true)">Edit About</button>
+                <button class="update-btn" onclick="toggleEdit(this, false)" style="display:none;">Update</button>
+            </div>
+            <div class="about-content">
+                <h2 class="about-title">Current About Parallax Depth:</h2>
+                <div class="about-description">
+                    <h3 class="content-hero-title editable-target">Your Title Here</h3>
+                    <p class="hero-subtitle-one editable-target">Subtitle one...</p>
+                    <p class="hero-subtitle-two editable-target">Subtitle two...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="editable-content" id="contact-container">
+            <div class="controls">
+                <button class="edit-btn" onclick="toggleEdit(this, true)">Edit Contact</button>
+                <button class="update-btn" onclick="toggleEdit(this, false)" style="display:none;">Update</button>
+            </div>
+            <div class="contact-section">
+                <div class="contact-content">
+                    <h2 class="contact-title">Current Contact Us</h2>
+                    <div class="contact-description">
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <span class="info-text connect-email editable-target">email@example.com</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <span class="info-text connect-phone editable-target">+1 234 567</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <span class="info-text connect-address editable-target">Pune</span>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">🌐</div>
+                            <span class="info-text connect-website editable-target">www.example.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <a href="#about" class="nav-btn-next" title="Next Section">
+            <div class="pyramid">
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-face"></div>
+                <div class="pyramid-base"></div>
+                <span class="pyramid-inner">▼</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#hero" class="footer-link">Home</a>
+                <a href="#about" class="footer-link">About</a>
+                <a href="#features" class="footer-link">Features</a>
+                <a href="#gallery" class="footer-link">Gallery</a>
+                <a href="#contact" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-copyright">
+                <p>© 2048 Parallax Depth Experience. All rights reserved.</p>
+                <p>Design: <a href="https://www.tooplate.com" target="_blank" rel="nofollow noopener">Tooplate</a></p>
+            </div>
+        </div>
+    </footer>
+
+<script src="tooplate-2144-parallax-scripts.js"></script>
+<script src="adminpanel.js"></script>
+</body>
+</html>
