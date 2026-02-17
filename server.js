@@ -113,6 +113,17 @@ app.post('/api/features',async(req,res) => {
     }
 });
 
+app.delete('/api/features/:id', async(req,res) => {
+    try{
+        const {id} = req.params;
+        await Feature.findByIdAndDelete(id);
+        res.status(200).json({message: "Feature Deleted Successfully"});
+    }
+    catch(err){
+        res.status(500).json({error: "Failed to Delete Feature"});
+    }
+});
+
 app.listen(3000, ()=>{
     console.log("Server running on port 3000");
 })

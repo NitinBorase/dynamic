@@ -2626,7 +2626,7 @@ html {
 	background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0f 100%);
 }
 
-.add-btn{
+.add-btn, .delete-btn{
 	padding: 10px 20px;
 	background: linear-gradient(135deg, var(--primary), var(--secondary));
 	border:rgba(255, 255, 255, 0.05);
@@ -2686,4 +2686,41 @@ html {
 	font-size: 1rem;
 	transition: all 0.3s ease;
 	margin-bottom: 20px;
+}
+
+.logout-btn{
+	padding: 10px 20px;
+	background: linear-gradient(135deg, var(--primary), var(--secondary));
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	top: 20px;
+	left: 20px;
+	transition: all 0.3s ease;
+	justify-content: flex-end;
+	justify-items: end;
+	margin-right: 1rem;
+}
+
+.logout-div{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.delete-feature-btn{
+	padding: 10px 10px;
+	background: rgb(236, 122, 118);
+	border: none;
+	border-radius: 50px;
+	color: var(--light);
+	font-size: 0.9rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.3s ease;
+    display: inline;
+	justify-content: center;
 }

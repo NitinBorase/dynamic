@@ -119,6 +119,7 @@ async function loadFeatures() {
          card.classList.add('feature-card-3d');
          card.innerHTML =`
             <div class="feature-card-content-3d">
+            <button class="delete-feature-btn" data-id="${feature._id}" type="button">🚫</button>
             <div class="feature-icon-3d">${feature.featureSign}</div>
             <h3 class="feature-title-3d">${feature.featureName}</h3>
             <p class="feature-description-3d">${feature.featureDescription}</p>
@@ -178,5 +179,26 @@ document.getElementById('featureForm').addEventListener('submit', async (e) => {
     catch(err){
         console.error(err);
         alert("Error Adding Feature");
+    }
+});
+
+document.addEventListener('click', async (e) => {
+    if(e.target.classList.contains('delete-feature-btn')){
+        const id = e.target.getAttribute('data-id');
+
+        alert("Are you sure you want to delete this feature?");
+
+        try{
+            const res = await fetch(`/api/features/${id}`, {
+                method: 'DELETE'
+            });
+
+            alert("Feature Deleted Successfully");
+            loadFeatures();
+        }
+        catch(err){
+            console.error(err);
+            alert("Error Deleting Feature");
+        }
     }
 });
