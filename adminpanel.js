@@ -187,6 +187,9 @@ document.addEventListener('click', async (e) => {
         const id = e.target.getAttribute('data-id');
 
         alert("Are you sure you want to delete this feature?");
+        if(!confirm("This action cannot be undone. Do you want to proceed?")){
+            return;
+        }
 
         try{
             const res = await fetch(`/api/features/${id}`, {
