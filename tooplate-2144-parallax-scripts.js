@@ -91,61 +91,104 @@ rectangles.forEach(rect => {
    });
 });
 
-// 3D Carousel Controls
-const carousel = document.getElementById('carousel');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const indicatorsContainer = document.getElementById('indicators');
-const featureCards = document.querySelectorAll('.feature-card-3d');
+// feature cards dynamic display
+async function loadFeatures() {
+   try{
+      const res = await fetch('/api/features');
+      if(!res.ok){
+         throw new Error("Failed to Load Features");
+      }
+        const featuresFromDB = await res.json();      
 
-let currentRotation = 0;
-let currentIndex = 0;
+      const carousel = document.getElementById('carousel');
 
-// Create indicators
-featureCards.forEach((_, index) => {
-   const indicator = document.createElement('div');
-   indicator.className = 'indicator';
-   if (index === 0) indicator.classList.add('active');
-   indicator.addEventListener('click', () => goToSlide(index));
-   indicatorsContainer.appendChild(indicator);
-});
+      carousel.innerHTML = '';
 
-const indicators = document.querySelectorAll('.indicator');
-
-// Update view - always use 3D rotation
-function updateView() {
-   carousel.style.transform = `rotateY(${currentRotation}deg)`;
-   updateIndicators();
+      featuresFromDB.forEach((feature) => {
+         const card = document.createElement('div');
+         card.classList.add('feature-card-3d');
+         card.innerHTML =`
+            <div class="feature-card-content-3d">
+            <div class="feature-icon-3d">${feature.featureSign}</div>
+            <h3 class="feature-title-3d">${feature.featureName}</h3>
+            <p class="feature-description-3d">${feature.featureDescription}</p>
+            </div>
+         `
+         carousel.appendChild(card);
+      });
+      initCarousel();
+   }catch(err){
+        console.error("Error loading features:", err);
+   }
 }
 
-// Update indicators
-function updateIndicators() {
-   indicators.forEach((indicator, index) => {
-      indicator.classList.toggle('active', index === currentIndex);
+document.addEventListener("DOMContentLoaded", loadFeatures);
+
+function initCarousel() {
+   // 3D Carousel Controls
+   const carousel = document.getElementById('carousel');
+   const prevBtn = document.getElementById('prevBtn');
+   const nextBtn = document.getElementById('nextBtn');
+   const indicatorsContainer = document.getElementById('indicators');
+   const featureCards = document.querySelectorAll('.feature-card-3d');
+   const totalCards = featureCards.length;
+   const angle = 360 / totalCards;
+   const radius = 350;
+
+   let currentRotation = 0;
+   let currentIndex = 0;
+
+   featureCards.forEach((card, index) => {
+      card.style.transform =
+         `rotateY(${index * angle}deg) translateZ(${radius}px)`;
    });
+
+   indicatorsContainer.innerHTML = '';
+   // Create indicators
+   featureCards.forEach((_, index) => {
+      const indicator = document.createElement('div');
+      indicator.className = 'indicator';
+      if (index === 0) indicator.classList.add('active');
+      indicator.onclick = () => goToSlide(index);
+      indicatorsContainer.appendChild(indicator);
+   });
+
+   const indicators = document.querySelectorAll('.indicator');
+
+   // Update view - always use 3D rotation
+   function updateView() {
+      carousel.style.transform = `rotateY(${currentRotation}deg)`;
+      updateIndicators();
+   }
+
+   // Update indicators
+   function updateIndicators() {
+      indicators.forEach((indicator, index) => {
+         indicator.classList.toggle('active', index === currentIndex);
+      });
+   }
+
+   // Go to specific slide
+   function goToSlide(index) {
+      currentIndex = index;
+      currentRotation = -index * angle;
+      updateView();
+   }
+
+   // Previous button
+   prevBtn.onclick = () => {
+      currentIndex = (currentIndex - 1 + featureCards.length) % featureCards.length;
+      currentRotation += angle;
+      updateView();
+   };
+
+   // Next button
+   nextBtn.onclick = () => {
+      currentIndex = (currentIndex + 1) % featureCards.length;
+      currentRotation -= angle;
+      updateView();
+   };
 }
-
-// Go to specific slide
-function goToSlide(index) {
-   currentIndex = index;
-   currentRotation = -index * 60;
-   updateView();
-}
-
-// Previous button
-prevBtn.addEventListener('click', () => {
-   currentIndex = (currentIndex - 1 + featureCards.length) % featureCards.length;
-   currentRotation += 60;
-   updateView();
-});
-
-// Next button
-nextBtn.addEventListener('click', () => {
-   currentIndex = (currentIndex + 1) % featureCards.length;
-   currentRotation -= 60;
-   updateView();
-});
-
 // Touch support for mobile
 let touchStartX = 0;
 let touchEndX = 0;
@@ -299,4 +342,37 @@ fetch('/api/connect')
       })
       .catch(err => console.error(err));
    });
-   });
+});
+
+// feature cards dynamic display
+async function loadFeatures() {
+   try{
+      const res = await fetch('/api/features');
+      if(!res.ok){
+         throw new Error("Failed to Load Features");
+      }
+        const featuresFromDB = await res.json();      
+
+      const carousel = document.getElementById('carousel');
+
+      carousel.innerHTML = '';
+
+      featuresFromDB.forEach((feature) => {
+         const card = document.createElement('div');
+         card.classList.add('feature-card-3d');
+         card.innerHTML =`
+            <div class="feature-card-content-3d">
+            <div class="feature-icon-3d">${feature.featureSign}</div>
+            <h3 class="feature-title-3d">${feature.featureName}</h3>
+            <p class="feature-description-3d">${feature.featureDescription}</p>
+            </div>
+         `
+         carousel.appendChild(card);
+      });
+      initCarousel();
+   }catch(err){
+        console.error("Error loading features:", err);
+   }
+}
+
+document.addEventListener("DOMContentLoaded", loadFeatures);

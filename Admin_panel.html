@@ -159,7 +159,24 @@ Free HTML CSS Template
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
+        <div class='features editable-content' id='features-container'>
+                <div class="container">
+                        <h2 class="section-title">Current Layered Features</h2>
+                    <button class='add-btn'>Add Feature</button>
+                        <div class="features-container">
+                            <div class="carousel-3d" id="carousel">
+
+                            </div>
+
+                            <div class="carousel-controls">
+                                <div class="carousel-btn" id="prevBtn">◀</div>
+                                <div class="carousel-btn" id="nextBtn">▶</div>
+                            </div>
+                                
+                            <div class="carousel-indicators" id="indicators"></div>
+                         </div>
+                </div>
         </div>
 
         <!-- Navigation -->
@@ -192,6 +209,20 @@ Free HTML CSS Template
             </div>
         </div>
     </footer>
+    <div id="featureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Add New Feature</h2>
+
+            <form id="featureForm">
+                <input type="text" id="featureSign" placeholder="Enter Feature Sign (Emoji)" required>
+                <input type="text" id="featureName" placeholder="Enter Feature Name" required>
+                <textarea id="featureDescription" placeholder="Enter Feature Description" required></textarea>
+                <button type="submit" class="submit-btn">Add Feature</button>
+            </form>
+        </div>
+    </div>
+
 
 <script src="tooplate-2144-parallax-scripts.js"></script>
 <script src="adminpanel.js"></script>

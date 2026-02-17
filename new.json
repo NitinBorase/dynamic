@@ -1,4 +1,30 @@
 {
-    "username":"Admin",
-    "password":"******"
+    "featureSign": "🚀",
+    "featureName": "Speed Layers",
+    "featureDescription": "Multiple parallax layers moving at different speeds create realistic depth perception as you scroll through the experience."
+}
+{
+    "featureSign": "✨",
+    "featureName": "3D Transforms",
+    "featureDescription": "Elements respond to interactions with smooth 3D rotations and translations, creating an engaging visual hierarchy."
+}
+{
+    "featureSign": "🎨",
+    "featureName": "Gradient Mastery",
+    "featureDescription": "Dynamic gradients and color transitions guide the eye through different depth levels, enhancing the parallax effect."
+}
+{
+    "featureSign": "💫",
+    "featureName": "Floating Elements",
+    "featureDescription": "Cards and orbs float independently, each with unique animation timing to create organic movement patterns."
+}
+{
+    "featureSign": "🌊",
+    "featureName": "Smooth Scrolling",
+    "featureDescription": "Optimized performance ensures buttery-smooth scrolling even with multiple animated layers and effects."
+}
+{
+    "featureSign": "🎯",
+    "featureName": "Interactive Focus",
+    "featureDescription": "Mouse-following effects and hover states add another dimension of interactivity to the parallax experience."
 }

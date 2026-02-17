@@ -100,3 +100,83 @@ async function saveContent(container){
         alert("Error Saving Content");
     }
 }
+
+// feature cards dynamic display
+async function loadFeatures() {
+   try{
+      const res = await fetch('/api/features');
+      if(!res.ok){
+         throw new Error("Failed to Load Features");
+      }
+        const featuresFromDB = await res.json();      
+
+      const carousel = document.getElementById('carousel');
+
+      carousel.innerHTML = '';
+
+      featuresFromDB.forEach((feature) => {
+         const card = document.createElement('div');
+         card.classList.add('feature-card-3d');
+         card.innerHTML =`
+            <div class="feature-card-content-3d">
+            <div class="feature-icon-3d">${feature.featureSign}</div>
+            <h3 class="feature-title-3d">${feature.featureName}</h3>
+            <p class="feature-description-3d">${feature.featureDescription}</p>
+            </div>
+         `
+         carousel.appendChild(card);
+      })
+      initCarousel();
+   }catch(err){
+        console.error("Error loading features:", err);
+   }
+}
+
+document.addEventListener("DOMContentLoaded", loadFeatures);
+
+const modal = document.getElementById('featureModal');
+const addBtn = document.querySelector('.add-btn');
+const closeBtn = document.querySelector('.close-btn');
+
+addBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.style.dispaly = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if(e.target === modal){
+        modal.style.display = 'none';
+    }
+});
+
+document.getElementById('featureForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const featureSign = document.getElementById('featureSign').value;
+    const featureName = document.getElementById('featureName').value;
+    const featureDescription = document.getElementById('featureDescription').value;
+
+    try{
+        const res = await fetch('/api/features', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                featureSign,
+                featureName,
+                featureDescription
+            })
+        });
+        if(!res.ok){
+            throw new Error("Failed to Add Feature");
+        }
+        alert("Feature Added Successfully");
+        modal.style.display = 'none';
+        loadFeatures();
+    }
+    catch(err){
+        console.error(err);
+        alert("Error Adding Feature");
+    }
+});

@@ -16,6 +16,7 @@ const Hero = require('./models/Hero');
 const Contact = require('./models/Contact');
 const Connect  = require('./models/Connect');
 const Admin = require('./models/Admin');
+const Feature = require('./models/Features');
 
 app.get('/api/hero',  async(req,res) => {
     const hero = await Hero.findOne();
@@ -87,6 +88,29 @@ app.post('/api/admin/login', async(req,res) => {
     } else {
         res.status(401).json({error: "Invalid Credentials"});
     }   
+});
+
+app.get('/api/features', async(req,res)  => {
+    try{
+        const features = await Feature.find().sort({featureNo: 1});
+        res.json(features);
+        res.status(200);
+    }
+    catch(err){
+        console.error("FEATURE API ERROR:", err);
+        res.status(500).json({error: "Failed to Fetch Features"});
+    }
+});
+
+app.post('/api/features',async(req,res) => {
+    try{
+        const feature = new Feature(req.body);
+        await feature.save();
+        res.status(201).json({message: "Feature Added Successfully"});
+    }
+    catch(err){
+        res.status(500).json({error: "Failed to Add Feature"});
+    }
 });
 
 app.listen(3000, ()=>{
