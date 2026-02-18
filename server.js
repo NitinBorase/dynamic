@@ -17,6 +17,7 @@ const Contact = require('./models/Contact');
 const Connect  = require('./models/Connect');
 const Admin = require('./models/Admin');
 const Feature = require('./models/Features');
+const Gallery = require('./models/Gallery');
 
 app.get('/api/hero',  async(req,res) => {
     const hero = await Hero.findOne();
@@ -121,6 +122,39 @@ app.delete('/api/features/:id', async(req,res) => {
     }
     catch(err){
         res.status(500).json({error: "Failed to Delete Feature"});
+    }
+});
+
+app.get('/api/gallery', async(req,res) => {
+    try{
+        const galleryItems = await Gallery.find();
+        res.json(galleryItems);
+        res.status(200);
+    }
+    catch(err){
+        res.status(500).json({error: "Failed to Fetch Gallery Items"});
+    }
+});
+
+app.post('/api/gallery', async(req,res) => {
+    try{
+        const galleryItem = new Gallery(req.body);
+        await galleryItem.save();
+        res.status(201).json({message: "Gallery Item Added Successfully"});
+    }
+    catch(err){
+        res.status(500).json({error: "Failed to Add Gallery Item"});
+    }
+});
+
+app.delete('/api/gallery/:id', async(req,res) => {
+    try{
+        const {id} = req.params;
+        await Gallery.findByIdAndDelete(id);
+        res.status(200).json({message: "Gallery Item Deleted Successfully"});
+    }
+    catch(err){
+        res.status(500).json({error: "Failed to Delete Gallery Item"});
     }
 });
 

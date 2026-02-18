@@ -133,7 +133,7 @@ async function loadFeatures() {
    }
 }
 
-document.addEventListener("DOMContentLoaded", loadFeatures);
+
 
 const modal = document.getElementById('featureModal');
 const addBtn = document.querySelector('.add-btn');
@@ -190,7 +190,6 @@ document.addEventListener('click', async (e) => {
         if(!confirm("This action cannot be undone. Do you want to proceed?")){
             return;
         }
-
         try{
             const res = await fetch(`/api/features/${id}`, {
                 method: 'DELETE'
@@ -205,3 +204,121 @@ document.addEventListener('click', async (e) => {
         }
     }
 });
+
+async function loadGallery(){
+    try{
+        const res = await fetch('/api/gallery', {
+            method: 'GET'
+        });
+        if(!res.ok){
+            throw new Error("Failed to Load Gallery Items");
+        }
+        const galleryItems = await res.json();
+
+        const galleryGrid = document.querySelector('.gallery-grid');
+        galleryGrid.innerHTML = '';
+        galleryItems.forEach(item => {
+            const card = document.createElement('div');
+            card.innerHTML = `
+            <div class = 'gallery-item'>
+            <img src="${item.imageSrc}" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">${item.imgTitle}</h3>
+                        <p class="gallery-subtitle">${item.imgDesc}</p>
+                    </div>
+            </div>
+            <button class="delete-gallery-btn" data-id="${item._id}" type="button">🚫</button>
+            `
+            galleryGrid.appendChild(card);
+        })
+    }
+    catch(err){
+        console.error(err);
+        alert("Error Loading Gallery Items");
+    }
+};
+
+const galleryModal = document.querySelector('.gallery-modal');    
+const addGalleryBtn = document.querySelector('.gallery-add-btn');
+const closeGalleryBtn = document.querySelector('.close-gallery-btn');
+
+addGalleryBtn.addEventListener('click', () => {
+    galleryModal.style.display = 'block';
+});
+
+closeGalleryBtn.addEventListener('click', () => {
+    galleryModal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+    if(e.target === galleryModal){
+        galleryModal.style.display = 'none';
+    }
+});
+
+document.getElementById('galleryForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const imageSrc = document.getElementById('galleryImageSrc').value;
+    const imgTitle = document.getElementById('galleryTitle').value;
+    const imgDesc = document.getElementById('galleryDescription').value;
+
+    try{
+        const res = await fetch('/api/gallery', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                imageSrc,
+                imgTitle,
+                imgDesc
+            })
+        });
+        if(!res.ok){
+            throw new Error("Failed to Add Gallery Item");
+        }
+        alert("Gallery Item Added Successfully");
+        galleryModal.style.display = 'none';
+        loadGallery();
+    }
+    catch(err){
+        console.error(err);
+        alert("Error Adding Gallery Item");
+    }
+});
+
+document.addEventListener('click', async (e) => {
+    if(e.target.classList.contains('delete-gallery-btn')){
+        const id = e.target.getAttribute('data-id');
+        alert("Are you sure you want to delete this gallery item?");
+        if(!confirm("This action cannot be undone. Do you want to proceed?")){
+            return;
+        }
+        try{
+            const res = await fetch(`/api/gallery/${id}`, {
+                method: 'DELETE'
+            });
+            if(!res.ok){
+                throw new Error("Failed to Delete Gallery Item");
+            }
+            alert("Gallery Item Deleted Successfully");
+            loadGallery();
+        }        catch(err){
+            console.error(err);
+            alert("Error Deleting Gallery Item");
+        }   
+    }
+});
+
+document.getElementsByClassName('logout-btn')[0].addEventListener('click', () => {
+    localStorage.removeItem('adminLoggedIn');
+    window.location.href = 'index.html';
+});
+
+const adminLoggedIn = localStorage.getItem('adminLoggedIn');
+if(!adminLoggedIn){
+    alert("Please log in to access the admin panel");
+    window.location.href = 'login.html';
+}
+
+//for loading dynamic content of features and gallery on page load
+document.addEventListener("DOMContentLoaded", loadFeatures);
+document.addEventListener("DOMContentLoaded", loadGallery);

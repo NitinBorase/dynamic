@@ -11,6 +11,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         const data = await response.json();
         if (response.ok) {
             alert(data.message);
+            localStorage.setItem('adminLoggedIn', 'true');
             // Redirect to admin dashboard or perform other actions
             window.location.href = 'Admin_panel.html'; // Example redirect
         } else {

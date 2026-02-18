@@ -375,4 +375,38 @@ async function loadFeatures() {
    }
 }
 
+async function loadGallery(){
+    try{
+        const res = await fetch('/api/gallery', {
+            method: 'GET'
+        });
+        if(!res.ok){
+            throw new Error("Failed to Load Gallery Items");
+        }
+        const galleryItems = await res.json();
+
+        const galleryGrid = document.querySelector('.gallery-grid');
+        galleryGrid.innerHTML = '';
+        galleryItems.forEach(item => {
+            const card = document.createElement('div');
+            card.innerHTML = `
+            <div class = 'gallery-item'>
+            <img src="${item.imageSrc}" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="gallery-title">${item.imgTitle}</h3>
+                        <p class="gallery-subtitle">${item.imgDesc}</p>
+                    </div>
+            </div>
+            `
+            galleryGrid.appendChild(card);
+        })
+    }
+    catch(err){
+        console.error(err);
+        alert("Error Loading Gallery Items");
+    }
+};
+
+//for loading dynamic content of features and gallery on page load
 document.addEventListener("DOMContentLoaded", loadFeatures);
+document.addEventListener("DOMContentLoaded", loadGallery);

@@ -181,6 +181,18 @@ Free HTML CSS Template
                 </div>
         </div>
 
+        <!-- gallery section -->
+        <div class="editable-content" id="gallery-content">
+            <section class="gallery-section section-gradient" id="gallery">
+            <div class="container">
+                <h2 class="section-title">Current Dynamic Gallery</h2>
+                <div class="gallerydiv"><button class='gallery-add-btn' id="addGalleryBtn">Add Gallery Item</button></div>
+                <div class="gallery-grid">
+                    
+                </div>
+            </div>
+        </div>
+
         <!-- Navigation -->
         <a href="#about" class="nav-btn-next" title="Next Section">
             <div class="pyramid">
@@ -224,6 +236,19 @@ Free HTML CSS Template
             </form>
         </div>
     </div>
+    <div id="galleryModal" class="gallery-modal">
+        <div class="modal-content">
+            <span class="close-gallery-btn">&times;</span>
+            <h2>Add New Gallery Item</h2>
+
+            <form id="galleryForm">
+                <input type="text" id="galleryImageSrc" placeholder="Enter Image Source URL" required>
+                <input type="text" id="galleryTitle" placeholder="Enter Gallery Item Title" required>
+                <textarea id="galleryDescription" placeholder="Enter Gallery Item Description" required></textarea>
+                <button type="submit" class="submit-btn">Add Gallery Item</button>
+            </form>
+        </div>
+    </div> 
 
 <script src="tooplate-2144-parallax-scripts.js"></script>
 <script src="adminpanel.js"></script>
