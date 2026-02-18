@@ -316,7 +316,7 @@ document.getElementsByClassName('logout-btn')[0].addEventListener('click', () =>
 const adminLoggedIn = localStorage.getItem('adminLoggedIn');
 if(!adminLoggedIn){
     alert("Please log in to access the admin panel");
-    window.location.href = 'login.html';
+    window.location.href = 'Login.html';
 }
 
 //for loading dynamic content of features and gallery on page load
